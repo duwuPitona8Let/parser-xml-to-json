@@ -44,7 +44,7 @@ def extract_schedule(group):
             if group_lessons is not None:
                 lessons = group_lessons.findall('Lesson')
                 for lesson in lessons:
-                    week_code = lesson.find('WeekCode').text
+                    week_code = int(lesson.find('WeekCode').text)
                     time = lesson.find('Time').text
                     discipline = lesson.find('Discipline').text
                     classroom = lesson.find('Classroom').text
