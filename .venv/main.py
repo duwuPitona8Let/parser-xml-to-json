@@ -9,6 +9,14 @@ TRANSLITERATION_DICT = {
     'А': 'A', 'Б': 'B', 'В': 'V', 'О': 'O', 'М': 'M', 'Е': 'E', 'И': 'I', 'С': 'C', 'Р': 'R',
     'П': 'P', 'К': 'K',
 }
+WEEKDAYS_DICT = {
+    'Понедельник': 1,
+    'Вторник': 2,
+    'Среда': 3,
+    'Четверг': 4,
+    'Пятница': 5,
+    'Суббота': 6,
+}
 
 
 
@@ -31,6 +39,7 @@ def extract_schedule(group):
     if days is not None:
         for day in days.findall('Day'):
             day_title = day.attrib['Title']
+            day_number = WEEKDAYS_DICT.get(day_title)
             group_lessons = day.find('GroupLessons')
             if group_lessons is not None:
                 lessons = group_lessons.findall('Lesson')
@@ -51,7 +60,7 @@ def extract_schedule(group):
                         lecturer_name = None
 
                     schedule.append({
-                        'day': day_title,
+                        'day': day_number,
                         'week_code': week_code,
                         'time': time,
                         'discipline': discipline,
