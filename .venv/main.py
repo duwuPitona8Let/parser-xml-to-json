@@ -30,6 +30,8 @@ def transliterate(text):
             transliterated_text += char
     return transliterated_text
 
+def clean_time(time):
+    return time.replace(' Четная', '').replace(' Нечетная', '')
 
 def extract_schedule(group):
     group_number = group.attrib['Number']
@@ -45,7 +47,7 @@ def extract_schedule(group):
                 lessons = group_lessons.findall('Lesson')
                 for lesson in lessons:
                     week_code = int(lesson.find('WeekCode').text)
-                    time = lesson.find('Time').text
+                    time = clean_time(lesson.find('Time').text)
                     discipline = lesson.find('Discipline').text
                     classroom = lesson.find('Classroom').text
 
